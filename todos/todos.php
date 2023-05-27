@@ -5,8 +5,8 @@ $db = DatabaseContext::getInstance();
 
 function getAllTodos() {
   $sql = '';
-  $sql .= 'SELECT id, descripcion, hecho ';
-  $sql .= 'FROM todos';
+  $sql .= 'SELECT `id`, `descripcion`, `hecho` ';
+  $sql .= 'FROM `todos`';
 
   $result = executeQuery($sql);
   return $result;
@@ -14,9 +14,8 @@ function getAllTodos() {
 
 function getTodoById($id) {
   $sql = '';
-  $sql .= 'SELECT id, description, done';
-  $sql .= 'FROM TODOS';
-  $sql .= 'SELECT id, description, done';
+  $sql .= 'SELECT `id`, `descripcion`, `hecho` ';
+  $sql .= 'FROM `todos`';
   $sql .= 'WHERE id = ' . $id;
 
   $result = executeQuery($sql);
@@ -25,10 +24,10 @@ function getTodoById($id) {
 
 function insertTodo($descripcion) {
   $sql = '';
-  $sql .= 'INSERT INTO todos ';
-  $sql .= '(descripcion) ';
+  $sql .= 'INSERT INTO `todos` ';
+  $sql .= '(`descripcion`) ';
   $sql .= 'VALUES ';
-  $sql .= '(\'' . $descripcion . '\');';
+  $sql .= '(`' . $descripcion . '`);';
 
   $result = executeQuery($sql);
   return $result;
@@ -36,10 +35,10 @@ function insertTodo($descripcion) {
 
 function updateTodo($id, $descripcion, $hecho) {
   $sql = '';
-  $sql .= 'UPDATE TODOS SET ';
+  $sql .= 'UPDATE `todos` SET ';
   //$sql .= 'descripcion = \'' . $descripcion . '\', ';
-  $sql .= 'hecho = '. $hecho . ' ';
-  $sql .= 'WHERE id = ' . $id . ';';
+  $sql .= '`hecho` = '. $hecho . ' ';
+  $sql .= 'WHERE `id` = ' . $id . ';';
 
   $result = executeQuery($sql);
   return $result;
@@ -47,8 +46,8 @@ function updateTodo($id, $descripcion, $hecho) {
 
 function deleteTodo($id) {
   $sql = '';
-  $sql .= 'DELETE FROM TODOS';
-  $sql .= 'WHERE id = ' . $id .';';
+  $sql .= 'DELETE FROM `todos`';
+  $sql .= 'WHERE `id` = ' . $id .';';
 
   $result = executeQuery($sql);
   return $result;
