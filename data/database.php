@@ -2,9 +2,8 @@
 class DatabaseContext {
   private $servidor = "localhost";
   private $usuario = "id18277836_mplp88";
-  private $password = "[PASSWORD_HERE]";
-  private $database = "todo-list"; // local
-  //private $database = "id18277836_ponsite"; // hosting
+  private $password = "M@rt!n2378$!";
+  private $database = "id18277836_ponsite";
   private $conn;
   private $error;
   private $resultSet;
