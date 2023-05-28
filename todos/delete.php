@@ -8,6 +8,10 @@ $error = '';
 $todoId = $_GET["id"];
 $todo = getTodoById($todoId);
 
+if(is_null($todo->getId())){
+  echo '<script>location.href="/todos"</script>';
+}
+
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];
 }
@@ -37,20 +41,20 @@ if(empty($error) && !empty($db->getError())) {
       echo '</div>';
     }
     ?>
-    <div class="card p-3 shadow mb-3">
+    <div>
       <form action="server.php" method="post">
+        <input type="hidden" name="todoId" id="todoId" value="<?= $todo->getId() ?>">
+        <input type="hidden" name="acc" id="acc" value="deleteTodo">
         <div class="form-group mb-3">
           <h3>Está a punto de eliminar este registro. ¿Está seguro?</h3>
-          <p><strong>Descripción: </strong><?= $todo->getDescripcion() ?></p>
-          <strong>Hecho</label>
-            <input 
-            type="checkbox"
-            name="checked"
-            id="checked"
-            <?= $todo->getHecho() ? 'checked' : '' ?>
-            disabled />
-          <input type="hidden" name="todoId" id="todoId" value="<?= $todo->getId() ?>">
-          <input type="hidden" name="acc" id="acc" value="deleteTodo">
+          <p>
+            <strong>Descripción: </strong>
+            <?= $todo->getDescripcion() ?>
+          </p>
+        </div>
+        <div class="form-group mb-3">
+          <strong>Hecho</strong>
+          <input type="checkbox" name="checked" id="checked" <?= $todo->getHecho() ? 'checked' : '' ?> disabled />
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-danger">Enviar</button>

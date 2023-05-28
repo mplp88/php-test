@@ -6,7 +6,11 @@ include('todos.php');
 $error = '';
 
 $todoId = $_GET["id"];
-$todo = getTodoById($todoId); 
+$todo = getTodoById($todoId);
+
+if(is_null($todo->getId())){
+  echo '<script>location.href="/todos"</script>';
+}
 
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];
@@ -42,6 +46,8 @@ if(empty($error) && !empty($db->getError())) {
         <div class="form-group mb-3">
           <label for="descripcion">Descripción</label>
           <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción..." value="<?= $todo->getDescripcion() ?>">
+        </div>
+        <div class="form-group mb-3">
           <label for="checked">
             <input 
             type="checkbox"

@@ -27,18 +27,19 @@ switch($acc) {
   case 'updateTodo':
     $todoId = $_POST['todoId'];
     $descripcion = $_POST['descripcion'];
-    $checked = $_POST['checked'];
+    $checked = '';
+    if(isset($_POST['checked'])) {
+      $checked = 1;
+    }
     updateTodo($todoId, $descripcion, $checked);
     break;
   case 'deleteTodo':
     $todoId = $_POST['todoId'];
-    $descripcion = $_POST['descripcion'];
-    $checked = $_POST['checked'];
-    deleteTodo($todoId, $descripcion, $checked);
+    deleteTodo($todoId);
     break;
   default:
     break;
 }
 
-header("Location: index.php");
+header("Location: /todos");
 ?>

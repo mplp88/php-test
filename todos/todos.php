@@ -7,15 +7,15 @@ class Todo {
   private $hecho;
 
   //getters
-  public function getId() : int {
+  public function getId() : ?int {
     return $this->id;
   }
 
-  public function getDescripcion() : string {
+  public function getDescripcion() : ?string {
     return $this->descripcion;
   }
 
-  public function getHecho() : bool {
+  public function getHecho() : ?bool {
     return $this->hecho;
   }
 
@@ -42,11 +42,11 @@ class TodoList {
   }
 
   //getters
-  public function getId() : int {
+  public function getId() : ?int {
     return $this->id;
   }
 
-  public function getTodos() : array {
+  public function getTodos() : ?array {
     return $this->todos;
   }
 
@@ -121,6 +121,7 @@ function insertTodo($descripcion) {
   $sql .= 'VALUES ';
   $sql .= '(\'' . $descripcion . '\');';
 
+  echo $sql;
   $result = executeQuery($sql);
   return $result;
 }

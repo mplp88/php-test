@@ -86,7 +86,8 @@ if(empty($error) && !empty($db->getError())) {
               type="checkbox"
               id="checked-<?= $fila->getId() ?>"
               <?= $fila->getHecho() ? 'checked' : '' ?>
-              onchange="toggleChecked(<?= $fila->getId() ?>)" />
+              onchange="toggleChecked(<?= $fila->getId() ?>)"
+              style="cursor: pointer;" />
           </td>
           <td>
             <a href="/todos/edit.php?id=<?= $fila->getId() ?>">Editar</a>
