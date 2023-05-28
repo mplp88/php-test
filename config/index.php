@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/head.php'); ?>

@@ -19,16 +19,22 @@ switch($acc) {
     $todoId = $_POST['todoId'];
     $checked = $_POST['checked'];
 
-    // echo '<p>Toggling checked. Todo with Id ' . $todoId . ' is now ';
-    // echo intval($checked) == 1 ? 'done' : 'undone';
-    // echo '</p>';
-    // echo '<br />';
-    // echo '<button onclick="history.back()">Go Back</button>';
-    // echo '<br />';
     updateTodo($todoId, '', $checked);
     break;
   case 'dismissError':
     unset($_SESSION['errorMessage']);
+    break;
+  case 'updateTodo':
+    $todoId = $_POST['todoId'];
+    $descripcion = $_POST['descripcion'];
+    $checked = $_POST['checked'];
+    updateTodo($todoId, $descripcion, $checked);
+    break;
+  case 'deleteTodo':
+    $todoId = $_POST['todoId'];
+    $descripcion = $_POST['descripcion'];
+    $checked = $_POST['checked'];
+    deleteTodo($todoId, $descripcion, $checked);
     break;
   default:
     break;

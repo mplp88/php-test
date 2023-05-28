@@ -5,7 +5,7 @@ include('todos.php');
 
 $error = '';
 
-$todos = getAllTodos(); 
+$todoList = getAllTodos(); 
 
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];
@@ -16,7 +16,7 @@ if(empty($error) && !empty($db->getError())) {
   $error = $db->getError();
 }
 ?>
-<html lang="en">
+<html lang="es">
 
 <head>
   <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/head.php'); ?>
@@ -55,11 +55,12 @@ if(empty($error) && !empty($db->getError())) {
           <th>Id</th>
           <th>Descripcion</th>
           <th>Hecho</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <?php
-        if($todos->num_rows == 0) {
+        if($todoList->count() == 0) {
         ?>
         <tr>
           <td colspan="3">
@@ -70,22 +71,26 @@ if(empty($error) && !empty($db->getError())) {
         }
         else
         {
-          while ($fila = $todos->fetch_assoc())
+          foreach ($todoList->getTodos() as $fila)
           {
         ?>
         <tr>
           <td>
-            <?= $fila['id'] ?>
+            <?= $fila->getId() ?>
           </td>
           <td>
-            <?= $fila['descripcion'] ?>
+            <?= $fila->getDescripcion() ?>
           </td>
           <td>
             <input 
               type="checkbox"
-              id="checked-<?= $fila['id']?>"
-              <?=intval($fila['hecho']) == 1 ? 'checked' : '' ?>
-              onchange="toggleChecked(<?= $fila['id'] ?>)" />
+              id="checked-<?= $fila->getId() ?>"
+              <?= $fila->getHecho() ? 'checked' : '' ?>
+              onchange="toggleChecked(<?= $fila->getId() ?>)" />
+          </td>
+          <td>
+            <a href="/todos/edit.php?id=<?= $fila->getId() ?>">Editar</a>
+            <a href="/todos/delete.php?id=<?= $fila->getId() ?>">Eliminar</a>
           </td>
         </tr>
         <?php
