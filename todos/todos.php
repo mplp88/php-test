@@ -121,7 +121,6 @@ function insertTodo($descripcion) {
   $sql .= 'VALUES ';
   $sql .= '(\'' . $descripcion . '\');';
 
-  echo $sql;
   $result = executeQuery($sql);
   return $result;
 }
