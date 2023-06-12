@@ -35,6 +35,7 @@ class Todo {
 
 class TodoList {
   private $id;
+  private $descripcion;
   private $todos;
 
   public function __construct() {
@@ -46,6 +47,10 @@ class TodoList {
     return $this->id;
   }
 
+  public function getDescripcion() : ?string {
+    return $this->descripcion;
+  }
+
   public function getTodos() : ?array {
     return $this->todos;
   }
@@ -54,6 +59,10 @@ class TodoList {
   //setters
   public function setId($id) : void {
     $this->id = $id;
+  }
+
+  public function setDescripcion($descripcion) : void {
+    $this->descripcion = $descripcion;
   }
 
   //metodos
@@ -71,6 +80,75 @@ class TodoList {
 }
 
 $db = DatabaseContext::getInstance();
+
+function createList($descripcion) {
+  $sql = '';
+  $sql .= 'INSERT INTO `todolists` ';
+  $sql .= '(`descripcion`) ';
+  $sql .= 'VALUES ';
+  $sql .= '(\'' . $descripcion . '\'); ';
+
+  $result = executeQuery($sql);
+}
+
+function getLists() {
+  $todoLists = [];
+
+  $sql = '';
+  $sql .= 'SELECT `id`, `descripcion` ';
+  $sql .= 'FROM `todolists`';
+
+  $result = executeQuery($sql);
+
+  while ($fila = $result->fetch_assoc())
+  {
+    $list = new TodoList();
+    $list->setId($fila['id']);
+    $list->setDescripcion($fila['descripcion']);
+    array_push($todoLists, $list);
+  }
+
+  return $todoLists;
+}
+
+function getListById($id) {
+  $todoList = new TodoList();
+
+  $sql = "SELECT\n"
+       . "    tl.id,\n"
+       . "    tl.descripcion AS descripcionLista,\n"
+       . "    t.id AS todoId,\n"
+       . "    t.descripcion AS descripcionTodo,\n"
+       . "    t.hecho\n"
+       . "FROM\n"
+       . "    todolists AS tl\n"
+       . "INNER JOIN todos AS t\n"
+       . "ON\n"
+       . "    tl.id = t.todoListId\n"
+       . "WHERE\n"
+       . "    tl.id = " . $id . ";";
+       
+  $result = executeQuery($sql);
+ 
+  $fila = $result->fetch_assoc();
+  if($fila) {
+
+    $todoList->setId($fila['id']);
+    $todoList->setDescripcion($fila['descripcionLista']);
+    
+    $result->data_seek(0);
+    while ($fila = $result->fetch_assoc())
+    {
+      $todo = new Todo();
+      $todo->setId($fila['todoId']);
+      $todo->setDescripcion($fila['descripcionTodo']);
+      $todo->setHecho($fila['hecho']);
+      $todoList->addTodo($todo);
+    }
+  }
+    
+  return $todoList;
+}
 
 function getAllTodos() {
   $todoList = new TodoList();
@@ -114,15 +192,14 @@ function getTodoById($id) {
   return $todo;
 }
 
-function insertTodo($descripcion) {
+function insertTodo($descripcion, $todoListId) {
   $sql = '';
   $sql .= 'INSERT INTO `todos` ';
-  $sql .= '(`descripcion`) ';
+  $sql .= '(`descripcion`, `todoListId`) ';
   $sql .= 'VALUES ';
-  $sql .= '(\'' . $descripcion . '\');';
+  $sql .= '(\'' . $descripcion . '\', ' . $todoListId . ');';
 
   $result = executeQuery($sql);
-  return $result;
 }
 
 function updateTodo($id, $descripcion, $hecho) {
