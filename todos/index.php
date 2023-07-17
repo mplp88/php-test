@@ -27,6 +27,11 @@ if(empty($error) && !empty($db->getError())) {
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/navbar.php') ?>
   </header>
   <main class="container">
+  <?php if(!isset($_SESSION['usuario'])) { ?>
+    <p class="alert alert-warning">
+      Tenes que <a href="/account/login.php">iniciar sesión</a> para ver la lista...
+    </p>
+  <?php } else { ?>
     <h1>To Do List</h1>
     <?php
     if (!empty($error)) {
@@ -107,6 +112,7 @@ if(empty($error) && !empty($db->getError())) {
       <input type="hidden" name="checked" id="checked" value="0" />
       <input type="hidden" name="theme" id="theme" value="" />
     </form>
+    <?php }?>
   </main>
   <footer class="footer">
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/copyright.php') ?>
