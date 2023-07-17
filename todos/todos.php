@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/data/database.php');
+$db = DatabaseContext::getInstance();
 
 class Todo {
   private $id;
@@ -69,8 +70,6 @@ class TodoList {
     return count($this->todos);
   }
 }
-
-$db = DatabaseContext::getInstance();
 
 function getAllTodos() {
   $todoList = new TodoList();
