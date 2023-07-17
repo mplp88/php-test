@@ -18,7 +18,6 @@ switch($acc) {
 
     if(!is_null($usuario->getId())) {
       $_SESSION['usuario'] = serialize($usuario);
-      echo 'Bienvenido, ' . $usuario->getEmail();
     } else {
       $_SESSION['errorMessage'] = 'Email / Contraseña invalidos';
     }
