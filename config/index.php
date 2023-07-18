@@ -11,6 +11,11 @@
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/navbar.php') ?>
   </header>
   <main class="container">
+  <?php if(!isset($_SESSION['usuario'])) { ?>
+    <p class="alert alert-warning">
+      Tenes que <a href="/account/login.php">iniciar sesión</a> para ver esta página...
+    </p>
+  <?php } else { ?>
     <h1>Config</h1>
     <form action="server.php" method="POST">
       <div class="form-group mb-3">
@@ -32,6 +37,7 @@
       <input class="btn btn-primary" type="submit" value="Guardar" />
     </form>
   </main>
+  <?php } ?>
   <footer class="footer">
     <p>Temas obtenidos de <a href="https://bootswatch.com/" target="_blank">bootswatch.com</a></p>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/copyright.php') ?>

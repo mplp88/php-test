@@ -1,10 +1,11 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/data/database.php');
 $db = DatabaseContext::getInstance();
+include('Configuracion.php');
 
-function insertOrUpdate($theme, $usuarioId) {
+function insertOrUpdate($configuracion) {
   $sql = 'SELECT `theme` FROM `configuracion`';
-  $sql .= 'WHERE `usuarioId` = ' . $usuarioId;
+  $sql .= 'WHERE `usuarioId` = ' . $configuracion->getUsuarioId();
   
   $result = executeQuery($sql);
 
@@ -12,11 +13,11 @@ function insertOrUpdate($theme, $usuarioId) {
     $sql = 'INSERT INTO `configuracion` ';
     $sql .= '(`theme`, `usuarioId`) ';
     $sql .= 'VALUES ';
-    $sql .= '(\'' . $theme . '\', ' . $usuarioId . ');';
+    $sql .= '(\'' . $configuracion->getTheme() . '\', ' . $configuracion->getUsuarioId() . ');';
   } else {
     $sql = 'UPDATE `configuracion` ';
-    $sql .= 'SET `theme` = \'' . $theme . '\' ';
-    $sql .= 'WHERE `usuarioId` = ' . $usuarioId . ';';
+    $sql .= 'SET `theme` = \'' . $configuracion->getTheme() . '\' ';
+    $sql .= 'WHERE `usuarioId` = ' . $configuracion->getUsuarioId() . ';';
   }
 
   executeQuery($sql);
@@ -26,7 +27,7 @@ function getTheme($usuarioId) {
   $theme = 'default';
   
   $sql = 'SELECT `theme` FROM `configuracion` ';
-  $sql .= 'WHERE usuarioId = ' . $usuarioId;
+  $sql .= 'WHERE `usuarioId` = ' . $usuarioId;
 
   $result = executeQuery($sql);
 
@@ -38,13 +39,5 @@ function getTheme($usuarioId) {
   }
 
   return $theme;
-}
-
-function executeQuery($query) {
-  global $db;
-  $db->connect();
-  $result = $db->executeQuery($query);
-  $db->close();
-  return $db->getResultSet();
 }
 ?>

@@ -25,21 +25,24 @@ function login($email, $password) {
 }
 
 function register($usuario) {
-  $query = 'INSERT INTO`usuarios` ';
-  $query = '(email, password) ';
-  $query = 'VALUES (';
-  $query = $usuario->email . ',';
-  $query = 'PASSWORD('.$usuario->password . ')';
-  $query = ')';
+  $query = 'INSERT INTO `usuarios` ';
+  $query .= '(`email`, `password`) ';
+  $query .= 'VALUES (';
+  $query .= '\''. $usuario->getEmail() . '\',';
+  $query .= 'PASSWORD(\''.$usuario->getPassword() . '\')';
+  $query .= ')';
   
   executeQuery($query);
 }
 
-function executeQuery($query) {
-  global $db;
-  $db->connect();
-  $result = $db->executeQuery($query);
-  $db->close();
-  return $db->getResultSet();
+function edit($usuario) {
+  $query = 'UPDATE `usuarios` ';
+  $query .= 'SET ';
+  $query .= '`email` = \''. $usuario->getEmail() . '\', ';
+  $query .= '`nombre` = \''. $usuario->getNombre() . '\', ';
+  $query .= '`apellido` = \''. $usuario->getApellido() . '\' ';
+  $query .= 'WHERE `id` = ' . $usuario->getId();
+  
+  executeQuery($query);
 }
 ?>

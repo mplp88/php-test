@@ -13,8 +13,20 @@ function toggleChecked(id) {
 
 function dismissError() {
   bootbox.alert('Loading...');
-  let formu = document.getElementById('formu');
-  formu.acc.value = 'dismissError';
+
+  let formu = document.createElement('form');
+  formu.method = 'POST';
+  formu.action = 'server.php';
+  formu.style.display = 'none';
+
+  let acc = document.createElement('input');
+  acc.type = 'hidden';
+  acc.name = 'acc';
+  acc.id = 'acc';
+  acc.value = 'dismissError';
+
+  formu.appendChild(acc);
+  document.body.appendChild(formu);
   formu.submit();
 }
 

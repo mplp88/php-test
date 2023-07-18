@@ -150,12 +150,4 @@ function deleteTodo($id) {
   $result = executeQuery($sql);
   return $result;
 }
-
-function executeQuery($query) {
-  global $db;
-  $db->connect();
-  $result = $db->executeQuery($query);
-  $db->close();
-  return $db->getResultSet();
-}
 ?>

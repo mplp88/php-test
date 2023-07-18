@@ -40,22 +40,10 @@ if(isset($_SESSION["errorMessage"])) {
       $email = $_SESSION['email'];
     }
     ?>
-    <div class="card p-3 shadow mb-3">
-      <form action="server.php" method="post">
-        <div class="form-group mb-3">
-          <label for="email">Email</label>
-          <input type="text" class="form-control" name="email" id="email" placeholder="Email..." value="<?= $email ?>">
-          <label for="password">Contraseña</label>
-          <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña...">
-          <label for="password">Repetir contraseña</label>
-          <input type="password" class="form-control" name="repeatPassword" id="repeatPassword" placeholder="Repetir contraseña...">
-          <input type="hidden" name="acc" id="acc" value="register">
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
-      </form>
+    <div class="alert alert-success">
+      <h3>Registro completo</h3>
     </div>
+    <p>Por favor, <a href="/account/login.php">ingrese</a> para poder configurar su perfil y hacer uso completo del sitio.</p>
   </main>
   <footer class="footer">
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/copyright.php') ?>

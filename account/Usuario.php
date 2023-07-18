@@ -15,6 +15,10 @@ class Usuario {
     return $this->email;
   }
 
+  function getPassword() {
+    return $this->password;
+  }
+
   function getNombre() {
     return $this->nombre;
   }

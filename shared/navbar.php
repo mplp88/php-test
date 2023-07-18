@@ -25,11 +25,17 @@
           <li>
             <a href="/account/login.php" class="dropdown-item">Ingresar</a>
           </li>
+          <li>
+            <a href="/account/register.php" class="dropdown-item">Registrarse</a>
+          </li>
           <?php } else {
             $usuario = unserialize($_SESSION['usuario']);
             ?>
           <li>
             <p class="dropdown-item">Bienvenido, <?= $usuario->getEmail() ?></p>
+          </li>
+          <li>
+            <a href="/account/profile.php" class="dropdown-item">Perfil</a>
           </li>
           <li>
             <a href="/config" class="dropdown-item">Configuracion</a>

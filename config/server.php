@@ -3,6 +3,8 @@ session_start();
 include($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
 include('config.php');
 
+$configuracion = new Configuracion();
+
 $acc;
 if(isset($_POST["acc"])){
   $acc = $_POST["acc"];
@@ -18,7 +20,10 @@ switch($acc) {
   case 'saveTheme':
     $theme = $_POST['theme'];
     $usuario = unserialize($_SESSION['usuario']);
-    insertOrUpdate($theme, $usuario->getId());
+
+    $configuracion->setUsuarioId($usuario->getId());
+    $configuracion->setTheme($theme);
+    insertOrUpdate($configuracion);
     break;
   default:
     break;

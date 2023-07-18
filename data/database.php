@@ -1,4 +1,6 @@
 <?php
+include($_SERVER['DOCUMENT_ROOT'] . '/shared/dbFunctions.php');
+
 class DatabaseContext {
   private $servidor = "localhost";
   private $usuario = "id18277836_mplp88";
@@ -20,7 +22,7 @@ class DatabaseContext {
     return self::$instances[$cls];
   }
 
-  public function getConection() {
+  public function getConnection() {
     return $this->conn;
   }
 
@@ -46,7 +48,7 @@ class DatabaseContext {
     $this->conn->close();
   }
 
-  function executeQuery($query) {
+  function executeDbQuery($query) {
     $this->resultSet = $this->conn->query($query);
   }
 }

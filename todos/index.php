@@ -5,7 +5,7 @@ include('todos.php');
 
 $error = '';
 
-$todoList = getAllTodos(); 
+$todoList = getAllTodos();
 
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];
@@ -29,7 +29,7 @@ if(empty($error) && !empty($db->getError())) {
   <main class="container">
   <?php if(!isset($_SESSION['usuario'])) { ?>
     <p class="alert alert-warning">
-      Tenes que <a href="/account/login.php">iniciar sesión</a> para ver la lista...
+      Tenes que <a href="/account/login.php">iniciar sesión</a> para ver esta página...
     </p>
   <?php } else { ?>
     <h1>To Do List</h1>

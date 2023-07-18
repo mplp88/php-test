@@ -27,7 +27,7 @@ if(isset($_SESSION["errorMessage"])) {
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/navbar.php') ?>
   </header>
   <main class="container">
-    <h1>Login</h1>
+    <h1>Ingresar</h1>
     <?php
     if (!empty($error)) {
       echo '<div id="error-message" class="alert alert-danger">';
