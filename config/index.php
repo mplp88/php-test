@@ -28,7 +28,7 @@
         ?>
         </select>
       </div>
-      <input type="hidden" name="acc" id="acc" value="saveConfig">
+      <input type="hidden" name="acc" id="acc" value="saveTheme">
       <input class="btn btn-primary" type="submit" value="Guardar" />
     </form>
   </main>
