@@ -30,9 +30,15 @@
           </li>
           <?php } else {
             $usuario = unserialize($_SESSION['usuario']);
+            $diplayName = '';
+            if($usuario->getNombre() != null) {
+              $displayName = $usuario->getNombre();
+            } else {
+              $displayName = $usuario->getEmail();
+            }
             ?>
           <li>
-            <p class="dropdown-item">Bienvenido, <?= $usuario->getEmail() ?></p>
+            <p class="dropdown-item">Bienvenido/a, <?= $displayName ?></p>
           </li>
           <li>
             <a href="/account/profile.php" class="dropdown-item">Perfil</a>
