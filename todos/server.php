@@ -44,6 +44,10 @@ switch($acc) {
     $descripcion = $_POST['descripcion'];
     createList($descripcion);
     break;
+  case 'deleteList':
+    $listId = $_POST['listId'];
+    deleteList($listId);
+    break;
   default:
     break;
 }
@@ -52,5 +56,6 @@ $location = "Location: /todos";
 if($listId) {
   $location .= "/?todoList=" . $listId;
 }
+
 header($location);
 ?>

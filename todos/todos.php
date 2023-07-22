@@ -92,6 +92,14 @@ function createList($descripcion) {
   $result = executeQuery($sql);
 }
 
+function deleteList($listId) {
+  $sql = '';
+  $sql .= 'DELETE FROM `todolists` ';
+  $sql .= 'WHERE `id` = ' . $listId . ';';
+
+  $result = executeQuery($sql);
+}
+
 function getLists() {
   $todoLists = [];
 
@@ -115,19 +123,10 @@ function getLists() {
 function getListById($id) {
   $todoList = new TodoList();
 
-  $sql = "SELECT\n"
-       . "    tl.id,\n"
-       . "    tl.descripcion AS descripcionLista,\n"
-       . "    t.id AS todoId,\n"
-       . "    t.descripcion AS descripcionTodo,\n"
-       . "    t.hecho\n"
-       . "FROM\n"
-       . "    todolists AS tl\n"
-       . "INNER JOIN todos AS t\n"
-       . "ON\n"
-       . "    tl.id = t.todoListId\n"
-       . "WHERE\n"
-       . "    tl.id = " . $id . ";";
+  $sql = '';
+  $sql .= 'SELECT `id`, `descripcion`';
+  $sql .= 'FROM `todolists` ';
+  $sql .= 'WHERE `id` = ' . $id . ';';
        
   $result = executeQuery($sql);
  
@@ -135,17 +134,17 @@ function getListById($id) {
   if($fila) {
 
     $todoList->setId($fila['id']);
-    $todoList->setDescripcion($fila['descripcionLista']);
+    $todoList->setDescripcion($fila['descripcion']);
     
-    $result->data_seek(0);
-    while ($fila = $result->fetch_assoc())
-    {
-      $todo = new Todo();
-      $todo->setId($fila['todoId']);
-      $todo->setDescripcion($fila['descripcionTodo']);
-      $todo->setHecho($fila['hecho']);
-      $todoList->addTodo($todo);
-    }
+    // $result->data_seek(0);
+    // while ($fila = $result->fetch_assoc())
+    // {
+    //   $todo = new Todo();
+    //   $todo->setId($fila['todoId']);
+    //   $todo->setDescripcion($fila['descripcionTodo']);
+    //   $todo->setHecho($fila['hecho']);
+    //   $todoList->addTodo($todo);
+    // }
   }
     
   return $todoList;
@@ -191,6 +190,28 @@ function getTodoById($id) {
   }
 
   return $todo;
+}
+
+function getTodosByListId($todoList) {
+  //$todoList = new TodoList();
+
+  $sql = '';
+  $sql .= 'SELECT `id`, `descripcion`, `hecho` ';
+  $sql .= 'FROM `todos` ';
+  $sql .= 'WHERE `todoListId` = ' . $todoList->getId();
+
+  $result = executeQuery($sql);
+
+  while ($fila = $result->fetch_assoc())
+  {
+    $todo = new Todo();
+    $todo->setId($fila['id']);
+    $todo->setDescripcion($fila['descripcion']);
+    $todo->setHecho($fila['hecho']);
+    $todoList->addTodo($todo);
+  }
+
+  return $todoList;
 }
 
 function insertTodo($descripcion, $todoListId) {

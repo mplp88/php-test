@@ -13,7 +13,10 @@ if(isset($_GET['todoList']))
   $selectedList = $_GET['todoList'];
   $todoList = getListById($selectedList);
 }
-//$todoList = getAllTodos();
+
+if(!empty($selectedList)) {
+  $todos = getTodosByListId($todoList);
+}
 
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];
@@ -69,14 +72,13 @@ if(empty($error) && !empty($db->getError())) {
     </div>
 
     <div class="row">
-      <div class="col-6">
+      <div class="col-md-3">
         <h3>Listas</h3>
         <table class="todo-list-table table">
           <thead>
             <tr>
-              <th>Id</th>
               <th>Descripcion</th>
-              <th>Acciones</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -84,7 +86,7 @@ if(empty($error) && !empty($db->getError())) {
             if(count($lists) == 0) {
             ?>
             <tr>
-              <td colspan="3">
+              <td colspan="2">
                 No hay listas que mostrar
               </td>
             </tr>
@@ -95,14 +97,11 @@ if(empty($error) && !empty($db->getError())) {
             ?>
             <tr style="cursor: pointer;" onclick="selectList(<?= $list->getId() ?>)">
               <td>
-                <?= $list->getId() ?>
-              </td>
-              <td>
                 <?= $list->getDescripcion() ?>
               </td>
               <td>
-                <a href="/todos/edit.php?id=<?= $list->getId() ?>">Editar</a>
-                <a href="/todos/delete.php?id=<?= $list->getId() ?>">Eliminar</a>
+                <a href="/todos/editList.php?id=<?= $list->getId() ?>">Editar</a>
+                <a href="/todos/deleteList.php?id=<?= $list->getId() ?>">Eliminar</a>
               </td>
             </tr>
             <?php
@@ -112,18 +111,17 @@ if(empty($error) && !empty($db->getError())) {
           </tbody>
         </table>
       </div>
-      <div class="col-6">
-        <h3>To Do</h3>
+      <div class="col-md-9">
+        <h3>Items</h3>
         <?php
         if(!empty($selectedList)) {
         ?>
         <table class="todo-table table">
           <thead>
             <tr>
-              <th>Id</th>
               <th>Descripcion</th>
               <th>Hecho</th>
-              <th>Acciones</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -141,9 +139,6 @@ if(empty($error) && !empty($db->getError())) {
               {
             ?>
             <tr>
-              <td>
-                <?= $fila->getId() ?>
-              </td>
               <td>
                 <?= $fila->getDescripcion() ?>
               </td>
