@@ -1,5 +1,9 @@
 <?php
 session_start();
+include($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
+include('config.php');
+
+$configuracion = new Configuracion();
 
 $acc;
 if(isset($_POST["acc"])){
@@ -13,9 +17,13 @@ switch($acc) {
   case 'dismissError':
     unset($_SESSION['errorMessage']);
     break;
-  case 'saveConfig':
+  case 'saveTheme':
     $theme = $_POST['theme'];
-    $_SESSION['theme'] = $theme;
+    $usuario = unserialize($_SESSION['usuario']);
+
+    $configuracion->setUsuarioId($usuario->getId());
+    $configuracion->setTheme($theme);
+    insertOrUpdate($configuracion);
     break;
   default:
     break;

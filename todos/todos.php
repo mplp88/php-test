@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/data/database.php');
+$db = DatabaseContext::getInstance();
 
 class Todo {
   private $id;
@@ -227,13 +228,5 @@ function deleteTodo($id) {
 
   $result = executeQuery($sql);
   return $result;
-}
-
-function executeQuery($query) {
-  global $db;
-  $db->connect();
-  $result = $db->executeQuery($query);
-  $db->close();
-  return $db->getResultSet();
 }
 ?>

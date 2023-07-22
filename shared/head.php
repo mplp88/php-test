@@ -3,8 +3,12 @@
 <?php
 $selectedTheme = 'default';
 
-if(isset($_SESSION["theme"])) {
-  $selectedTheme = $_SESSION["theme"];
+require_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
+
+if(isset($_SESSION["usuario"])) {
+  $usuario = unserialize($_SESSION["usuario"]);
+  $selectedTheme = getTheme($usuario->getId());
 }
 
 $bootstrapStyleSheet = '<link rel="stylesheet" href="/css/bootstrap.';
