@@ -12,10 +12,10 @@ function toggleChecked(id) {
 }
 
 function crearLista() {
-  bootbox.prompt('Nueva lista', crearLIstaDo);
+  bootbox.prompt('Nueva lista', crearListaDo);
 }
 
-function crearLIstaDo(nombreLista) {
+function crearListaDo(nombreLista) {
   if (!nombreLista || nombreLista == undefined) {
     bootbox.alert('El nombre de la lista no puede estar vacío!');
     return
