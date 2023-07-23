@@ -2,7 +2,7 @@
 session_start();
 include('todos.php');
 
-$listId = 0;
+$listId = -1;
 $acc;
 
 if(isset($_POST["acc"])){
@@ -16,7 +16,11 @@ switch($acc) {
   case 'newTodo':
     $descripcion = $_POST['descripcion'];
     $listId = $_POST['listId'];
-    insertTodo($descripcion, $listId);
+    if($listId == -1) {
+      $_SESSION['errorMessage'] = 'Debe seleccionar una lista';
+    } else {
+      insertTodo($descripcion, $listId);
+    }
     break;
   case 'toggleChecked':
     $todoId = $_POST['todoId'];
@@ -47,14 +51,19 @@ switch($acc) {
   case 'deleteList':
     $listId = $_POST['listId'];
     deleteList($listId);
-    $listId = '';
+    $listId = -1;
+    break;
+  case 'updateList':
+    $listId = $_POST['listId'];
+    $descripcion = $_POST['descripcion'];
+    updateList($listId, $descripcion);
     break;
   default:
     break;
 }
 
 $location = "Location: /todos";
-if($listId) {
+if($listId != -1) {
   $location .= "/?todoList=" . $listId;
 }
 

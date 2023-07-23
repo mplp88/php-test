@@ -99,6 +99,16 @@ function createList($descripcion) {
   $result = executeQuery($sql);
 }
 
+function updateList($id, $descripcion) {
+  $sql = '';
+  $sql .= 'UPDATE `todoLists` SET ';
+  $sql .= 'descripcion = \'' . $descripcion . '\' ';
+  $sql .= 'WHERE `id` = ' . $id . ';';
+
+  $result = executeQuery($sql);
+  return $result;
+}
+
 function deleteList($listId) {
   $sql = '';
   $sql .= 'DELETE FROM `todoLists` ';

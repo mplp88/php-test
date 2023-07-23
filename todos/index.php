@@ -6,7 +6,7 @@ include('todos.php');
 $error = '';
 
 $lists = getLists();
-$selectedList = '';
+$selectedList = -1;
 $todoList = [];
 if(isset($_GET['todoList'])) 
 {
@@ -40,7 +40,7 @@ if(empty($error) && !empty($db->getError())) {
       Tenes que <a href="/account/login.php">iniciar sesión</a> para ver esta página...
     </p>
   <?php } else { ?>
-    <h1>To Do List</h1>
+    <h1>Listas de quehaceres</h1>
     <?php
     if (!empty($error)) {
       echo '<div id="error-message" class="alert alert-danger">';
@@ -109,7 +109,7 @@ if(empty($error) && !empty($db->getError())) {
         </table>
       </div>
       <?php
-      if(!empty($selectedList)) {
+      if($selectedList != -1) {
       ?>
       <div class="col-md-8">
         <div class="row">
