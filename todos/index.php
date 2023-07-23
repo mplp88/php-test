@@ -12,9 +12,6 @@ if(isset($_GET['todoList']))
 {
   $selectedList = $_GET['todoList'];
   $todoList = getListById($selectedList);
-}
-
-if(!empty($selectedList)) {
   $todos = getTodosByListId($todoList);
 }
 
@@ -54,7 +51,7 @@ if(empty($error) && !empty($db->getError())) {
     ?>
     <div class="mb-3">
       <button class="btn btn-primary" onclick="crearLista()">
-        Crear lista
+       Crear lista
       </button>
     </div>
     <div class="card p-3 shadow mb-3">
@@ -72,7 +69,7 @@ if(empty($error) && !empty($db->getError())) {
     </div>
 
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <h3>Listas</h3>
         <table class="todo-list-table table">
           <thead>
@@ -111,12 +108,18 @@ if(empty($error) && !empty($db->getError())) {
           </tbody>
         </table>
       </div>
-      <div class="col-md-9">
-        <h3>Items</h3>
-        <?php
-        if(!empty($selectedList)) {
-        ?>
-        <table class="todo-table table">
+      <?php
+      if(!empty($selectedList)) {
+      ?>
+      <div class="col-md-8">
+        <div class="row">
+
+          <div class="col-10">
+            <h3>Items de lista '<?= $todoList->getDescripcion() ?>'</h3>
+          </div>
+          <div class="col-2"><button class="btn btn-outline-danger" onclick="closeList()"><i class="fa-solid fa-xmark"></i></button></div>
+        </div>
+          <table class="todo-table table">
           <thead>
             <tr>
               <th>Descripcion</th>
@@ -161,10 +164,10 @@ if(empty($error) && !empty($db->getError())) {
             ?>
           </tbody>
         </table>
-        <?php
-        }
-        ?>
       </div>
+      <?php
+      }
+      ?>
     </div>
     <form id="formu" action="server.php" method="post">
       <input type="hidden" name="acc" id="acc" value="" />

@@ -16,6 +16,11 @@ function crearLista() {
 }
 
 function crearLIstaDo(nombreLista) {
+  if (!nombreLista || nombreLista == undefined) {
+    bootbox.alert('El nombre de la lista no puede estar vacío!');
+    return
+  }
+
   let form = document.createElement('form');
   form.method = 'post';
   form.action = 'server.php';
@@ -40,6 +45,10 @@ function crearLIstaDo(nombreLista) {
 
 function selectList(id) {
   location.href = '/todos/?todoList=' + id;
+}
+
+function closeList() {
+  location.href = '/todos/';
 }
 
 function dismissError() {

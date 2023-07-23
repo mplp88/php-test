@@ -1,6 +1,11 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/data/database.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
+
 $db = DatabaseContext::getInstance();
+
+$usuario = unserialize($_SESSION["usuario"]);
+$usuarioId = $usuario->getId();
 
 class Todo {
   private $id;
@@ -83,29 +88,33 @@ class TodoList {
 $db = DatabaseContext::getInstance();
 
 function createList($descripcion) {
+  global $usuarioId;
+
   $sql = '';
-  $sql .= 'INSERT INTO `todolists` ';
-  $sql .= '(`descripcion`) ';
+  $sql .= 'INSERT INTO `todoLists` ';
+  $sql .= '(`descripcion`, `usuarioId`) ';
   $sql .= 'VALUES ';
-  $sql .= '(\'' . $descripcion . '\'); ';
+  $sql .= '(\'' . $descripcion . '\', ' . $usuarioId . '); ';
 
   $result = executeQuery($sql);
 }
 
 function deleteList($listId) {
   $sql = '';
-  $sql .= 'DELETE FROM `todolists` ';
+  $sql .= 'DELETE FROM `todoLists` ';
   $sql .= 'WHERE `id` = ' . $listId . ';';
 
   $result = executeQuery($sql);
 }
 
 function getLists() {
+  global $usuarioId;
   $todoLists = [];
 
   $sql = '';
   $sql .= 'SELECT `id`, `descripcion` ';
-  $sql .= 'FROM `todolists`';
+  $sql .= 'FROM `todoLists` ';
+  $sql .= 'WHERE `usuarioId` = ' . $usuarioId;
 
   $result = executeQuery($sql);
 
@@ -125,7 +134,7 @@ function getListById($id) {
 
   $sql = '';
   $sql .= 'SELECT `id`, `descripcion`';
-  $sql .= 'FROM `todolists` ';
+  $sql .= 'FROM `todoLists` ';
   $sql .= 'WHERE `id` = ' . $id . ';';
        
   $result = executeQuery($sql);

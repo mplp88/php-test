@@ -4,7 +4,7 @@
 $selectedTheme = 'default';
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
 
 if(isset($_SESSION["usuario"])) {
   $usuario = unserialize($_SESSION["usuario"]);
@@ -22,4 +22,5 @@ echo $bootstrapStyleSheet;
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootbox.all.min.js"></script>
 <script src="/js/index.js"></script>
+<script src="https://kit.fontawesome.com/17ae34bd66.js" crossorigin="anonymous"></script>
 <title>Pon Site</title>

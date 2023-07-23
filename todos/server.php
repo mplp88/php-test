@@ -47,6 +47,7 @@ switch($acc) {
   case 'deleteList':
     $listId = $_POST['listId'];
     deleteList($listId);
+    $listId = '';
     break;
   default:
     break;
