@@ -42,6 +42,7 @@ class Todo {
 class TodoList {
   private $id;
   private $descripcion;
+  private $usuarioId;
   private $todos;
 
   public function __construct() {
@@ -57,6 +58,10 @@ class TodoList {
     return $this->descripcion;
   }
 
+  public function getUsuarioId() : ?int {
+    return $this->usuarioId;
+  }
+
   public function getTodos() : ?array {
     return $this->todos;
   }
@@ -70,6 +75,11 @@ class TodoList {
   public function setDescripcion($descripcion) : void {
     $this->descripcion = $descripcion;
   }
+  
+  public function setUsuarioId($usuarioId) : void {
+    $this->usuarioId = $usuarioId;
+  }
+
 
   //metodos
   public function addTodo($todo) : void {
@@ -143,7 +153,7 @@ function getListById($id) {
   $todoList = new TodoList();
 
   $sql = '';
-  $sql .= 'SELECT `id`, `descripcion`';
+  $sql .= 'SELECT `id`, `descripcion`, `usuarioId` ';
   $sql .= 'FROM `todoLists` ';
   $sql .= 'WHERE `id` = ' . $id . ';';
        
@@ -154,6 +164,7 @@ function getListById($id) {
 
     $todoList->setId($fila['id']);
     $todoList->setDescripcion($fila['descripcion']);
+    $todoList->setUsuarioId($fila['usuarioId']);
     
     // $result->data_seek(0);
     // while ($fila = $result->fetch_assoc())
@@ -213,6 +224,18 @@ function getTodoById($id) {
 
 function getTodosByListId($todoList) {
   //$todoList = new TodoList();
+  global $usuarioId;
+  
+  if($usuarioId != $todoList->getUsuarioId()) {
+    $todoList->setDescripcion('LISTA INACCESIBLE');
+    $todo = new Todo();
+    $todo->setId(-1);
+    $todo->setDescripcion('Usted no posee privilegios para poder ver esta lista');
+    $todo->setHecho(true);
+    $todoList->addTodo($todo);
+    
+    return $todoList;
+  }
 
   $sql = '';
   $sql .= 'SELECT `id`, `descripcion`, `hecho` ';

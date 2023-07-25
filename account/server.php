@@ -19,6 +19,7 @@ switch($acc) {
 
     if(!is_null($usuario->getId())) {
       $_SESSION['usuario'] = serialize($usuario);
+      setcookie('sesion', $usuario->getId());
       $redirect .= '/';
     } else {
       $_SESSION['errorMessage'] = 'Email / Contraseña invalidos.';
