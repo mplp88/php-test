@@ -16,9 +16,13 @@ function crearLista() {
 }
 
 function crearListaDo(nombreLista) {
-  if (!nombreLista || nombreLista == undefined) {
+  if (nombreLista == null) {
+    return;
+  }
+
+  if (nombreLista == '') {
     bootbox.alert('El nombre de la lista no puede estar vacío!');
-    return
+    return;
   }
 
   let form = document.createElement('form');
