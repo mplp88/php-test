@@ -22,6 +22,6 @@ echo $bootstrapStyleSheet;
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootbox.all.min.js"></script>
-<script src="/js/index.js"></script>
+<script src="/js/main.js"></script>
 <script src="https://kit.fontawesome.com/17ae34bd66.js" crossorigin="anonymous"></script>
 <title>Pon Site</title>
