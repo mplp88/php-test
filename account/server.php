@@ -15,12 +15,13 @@ switch($acc) {
   case 'login':
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $returnUrl = $_POST['returnUrl'];
     $usuario = login($email, $password);
 
     if(!is_null($usuario->getId())) {
       $_SESSION['usuario'] = serialize($usuario);
       setcookie('sesion', $usuario->getId());
-      $redirect .= '/';
+      $redirect .= '/' . $returnUrl;
     } else {
       $_SESSION['errorMessage'] = 'Email / Contraseña invalidos.';
       $redirect .= '/account/login.php';

@@ -4,8 +4,10 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
 
 $db = DatabaseContext::getInstance();
 
-$usuario = unserialize($_SESSION["usuario"]);
-$usuarioId = $usuario->getId();
+if(isset($_SESSION["usuario"])) {
+  $usuario = unserialize($_SESSION["usuario"]);
+  $usuarioId = $usuario->getId();
+}
 
 class Todo {
   private $id;

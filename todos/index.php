@@ -5,7 +5,10 @@ include('todos.php');
 
 $error = '';
 
-$lists = getLists();
+$lists = '';
+if(isset($_SESSION["usuario"])) {
+  $lists = getLists();
+}
 $selectedList = -1;
 $todoList = [];
 if(isset($_GET['todoList'])) 
@@ -37,7 +40,7 @@ if(empty($error) && !empty($db->getError())) {
   <main class="container">
   <?php if(!isset($_SESSION['usuario'])) { ?>
     <p class="alert alert-warning">
-      Tenes que <a href="/account/login.php">iniciar sesión</a> para ver esta página...
+      Tenés que <a href="/account/login.php?returnUrl=todos">iniciar sesión</a> para ver esta página...
     </p>
   <?php } else { ?>
     <h1>Listas de quehaceres</h1>

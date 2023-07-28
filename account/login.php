@@ -5,6 +5,11 @@
 
 $error = '';
 
+$returnUrl = '';
+if(isset($_GET['returnUrl'])) {
+  $returnUrl = $_GET['returnUrl'];
+}
+
 //$todoList = getAllTodos(); 
 
 if(isset($_SESSION["errorMessage"])) {
@@ -44,6 +49,7 @@ if(isset($_SESSION["errorMessage"])) {
           <label for="password">Contraseña</label>
           <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña...">
           <input type="hidden" name="acc" id="acc" value="login">
+          <input type="hidden" name="returnUrl" id="returnUrl" value="<?= $returnUrl ?>">
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Enviar</button>

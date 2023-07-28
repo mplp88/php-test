@@ -29,7 +29,7 @@ if(isset($_SESSION["errorMessage"])) {
   <main class="container">
   <?php if(!isset($_SESSION['usuario'])) { ?>
     <p class="alert alert-warning">
-      Tenes que <a href="/account/login.php">iniciar sesión</a> para ver esta página...
+      Tenes que <a href="/account/login.php?returnUrl=account/profile.php">iniciar sesión</a> para ver esta página...
     </p>
   <?php
     } else {
