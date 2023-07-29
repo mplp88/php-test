@@ -13,7 +13,6 @@
       <p class="alert alert-warning">
         Sitio en construcción, disculpe las molestias...
       </p>
-      <button class="btn btn-primary" onclick="testBootbox()">Test Bootbox</button>
     </main>
     <footer class="footer">
       <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/copyright.php') ?>

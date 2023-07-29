@@ -58,10 +58,13 @@ if(empty($error) && !empty($db->getError())) {
       </button>
     </div>
     <div class="card p-3 shadow mb-3">
-      <form action="server.php" method="post">
+      <form class="needs-validation" onsubmit="return validate()" action="server.php" method="post" novalidate>
         <div class="form-group mb-3">
           <label for="descripcion">Descripción</label>
-          <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción...">
+          <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción..." required>
+          <div class="invalid-feedback">
+            La descripcion no puede estar vacía.
+          </div>
           <input type="hidden" name="listId" id="listId" value="<?= $selectedList ?>">
           <input type="hidden" name="acc" id="acc" value="newTodo">
         </div>
@@ -172,14 +175,8 @@ if(empty($error) && !empty($db->getError())) {
       }
       ?>
     </div>
-    <form id="formu" action="server.php" method="post">
-      <input type="hidden" name="acc" id="acc" value="" />
-      <input type="hidden" name="todoId" id="todoId" value="" />
-      <input type="hidden" name="todoDescription" id="todoDescription" value="" />
-      <input type="hidden" name="checked" id="checked" value="0" />
-      <input type="hidden" name="theme" id="theme" value="" />
-    </form>
     <?php }?>
+    <script src="/js/todos.js"></script>
   </main>
   <footer class="footer">
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/copyright.php') ?>

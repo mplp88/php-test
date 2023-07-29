@@ -2,8 +2,8 @@
 session_start();
 include('todos.php');
 
-$listId = -1;
 $acc;
+$listId = -1;
 
 if(isset($_POST["acc"])){
   $acc = $_POST["acc"];
@@ -12,10 +12,13 @@ if(isset($_POST["acc"])){
   header("Location: index.php");
 }
 
+if(isset($_POST['listId'])) {
+  $listId = $_POST['listId'];
+}
+
 switch($acc) {
   case 'newTodo':
     $descripcion = $_POST['descripcion'];
-    $listId = $_POST['listId'];
     if($listId == -1) {
       $_SESSION['errorMessage'] = 'Debe seleccionar una lista';
     } else {
