@@ -7,9 +7,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/account/Usuario.php');
 include_once('session.php');
 
-if(isset($_SESSION["usuario"])) {
-  $usuario = unserialize($_SESSION["usuario"]);
-  $selectedTheme = getTheme($usuario->getId());
+try {
+  if(isset($_SESSION["usuario"])) {
+    $usuario = unserialize($_SESSION["usuario"]);
+    $selectedTheme = getTheme($usuario->getId());
+  }
+} catch {
+  echo '<script>window.location.href = /account/logout.php';
 }
 
 $bootstrapStyleSheet = '<link rel="stylesheet" href="/css/bootstrap.';
@@ -22,6 +26,6 @@ echo $bootstrapStyleSheet;
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootbox.all.min.js"></script>
-<script src="/js/main.js"></script>
 <script src="https://kit.fontawesome.com/17ae34bd66.js" crossorigin="anonymous"></script>
+<script src="/js/main.js?v=2"></script>
 <title>Pon Site</title>

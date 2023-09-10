@@ -18,5 +18,8 @@ function dismissError() {
 }
 
 function showLoading() {
-  bootbox.alert('Cargando...');
+  bootbox.alert({
+    message: 'Cargando...',
+    closeButton: false
+  });
 }
