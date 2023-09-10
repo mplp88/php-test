@@ -13,5 +13,5 @@ jobs:
       with:
         server: files.000webhost.com
         username: pon-site
-        password: ${{ secrets.ftp_password }}
+        password: ${{ secrets.FTP_PASSWORD }}
         server-dir: public_html/
