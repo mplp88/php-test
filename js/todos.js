@@ -5,6 +5,7 @@ function selectList(id) {
 
 function closeList() {
   showLoading();
+  document.querySelector('#todo-list').style.display = 'none';
   location.href = '/todos/';
 }
 

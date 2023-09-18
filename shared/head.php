@@ -12,7 +12,7 @@ try {
     $usuario = unserialize($_SESSION["usuario"]);
     $selectedTheme = getTheme($usuario->getId());
   }
-} catch {
+} catch (Exception $ex) {
   echo '<script>window.location.href = /account/logout.php';
 }
 

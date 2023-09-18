@@ -97,8 +97,6 @@ class TodoList {
   }
 }
 
-$db = DatabaseContext::getInstance();
-
 function createList($descripcion) {
   global $usuarioId;
 

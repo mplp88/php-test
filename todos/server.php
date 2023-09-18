@@ -1,6 +1,9 @@
 <?php
 session_start();
+require_once($_SERVER['DOCUMENT_ROOT'] . '/data/database.php');
 include('todos.php');
+
+$db = DatabaseContext::getInstance();
 
 $acc;
 $listId = -1;
@@ -50,6 +53,7 @@ switch($acc) {
   case 'createList':
     $descripcion = $_POST['descripcion'];
     createList($descripcion);
+    $listId = $db->getInsertId();
     break;
   case 'deleteList':
     $listId = $_POST['listId'];

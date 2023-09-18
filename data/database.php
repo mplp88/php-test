@@ -9,6 +9,7 @@ class DatabaseContext {
   private $conn;
   private $error;
   private $resultSet;
+  private $insertId;
   private static $instances = [];
 
   protected function __construct() { }
@@ -34,6 +35,10 @@ class DatabaseContext {
     return $this->resultSet;
   }
 
+  function getInsertId() {
+    return $this->insertId;
+  }
+
   function connect() {
     // Create connection
     $this->conn = new mysqli($this->servidor, $this->usuario, $this->password, $this->database);
@@ -50,6 +55,7 @@ class DatabaseContext {
 
   function executeDbQuery($query) {
     $this->resultSet = $this->conn->query($query);
+    $this->insertId = $this->conn->insert_id;
   }
 }
 ?>

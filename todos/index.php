@@ -117,7 +117,7 @@ if(empty($error) && !empty($db->getError())) {
       <?php
       if($selectedList != -1) {
       ?>
-      <div class="col-md-8">
+      <div id="todo-list" class="col-md-8">
         <div class="row">
 
           <div class="col-10">
