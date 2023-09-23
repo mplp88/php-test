@@ -55,7 +55,7 @@ function generateRecoveryToken($email) {
   $expire = new DateTime(); 
   $expire->modify('+1 hour');
 
-  $query = 'INSERT INTO `recoverytokens` ';
+  $query = 'INSERT INTO `recoveryTokens` ';
   $query .= '(email, token, expire) ';
   $query .= 'VALUES ';
   $query .= '(\''. $email . '\', \'' . $token . '\', \'' . $expire->format('Y-m-d H:i:s') . '\')';
@@ -80,7 +80,7 @@ function changePassword($action, $password, $token) {
 
   if($action == 'recover') {
     $query = 'SELECT `email`, `expire` ';
-    $query .= 'FROM `recoverytokens` ';
+    $query .= 'FROM `recoveryTokens` ';
     $query .= 'WHERE `token` = \'' . $token . '\';';
     
     executeQuery($query);

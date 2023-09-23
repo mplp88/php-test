@@ -165,16 +165,6 @@ function getListById($id) {
     $todoList->setId($fila['id']);
     $todoList->setDescripcion($fila['descripcion']);
     $todoList->setUsuarioId($fila['usuarioId']);
-    
-    // $result->data_seek(0);
-    // while ($fila = $result->fetch_assoc())
-    // {
-    //   $todo = new Todo();
-    //   $todo->setId($fila['todoId']);
-    //   $todo->setDescripcion($fila['descripcionTodo']);
-    //   $todo->setHecho($fila['hecho']);
-    //   $todoList->addTodo($todo);
-    // }
   }
     
   return $todoList;
@@ -223,7 +213,6 @@ function getTodoById($id) {
 }
 
 function getTodosByListId($todoList) {
-  //$todoList = new TodoList();
   global $usuarioId;
   
   if($usuarioId != $todoList->getUsuarioId()) {

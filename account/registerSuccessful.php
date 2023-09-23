@@ -1,11 +1,8 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <?php
-//include('todos.php');
 
 $error = '';
-
-//$todoList = getAllTodos(); 
 
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];

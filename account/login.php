@@ -1,7 +1,6 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <?php
-//include('todos.php');
 
 $error = '';
 
@@ -9,8 +8,6 @@ $returnUrl = '';
 if(isset($_GET['returnUrl'])) {
   $returnUrl = $_GET['returnUrl'];
 }
-
-//$todoList = getAllTodos(); 
 
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];
