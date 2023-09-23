@@ -51,8 +51,33 @@ switch($acc) {
     }
     break;
   case 'changePassword':
+    $token = $_POST['token'];
+    $password = $_POST['password'];
+    $action = $_POST['action'];
+    $redirect = '/account/changePassword.php';
+    if($action == 'recover' && empty($token)) {
+      $_SESSION['changePasswordError'] = 'Token inválido';
+      break;
+    }
+
+    $success = changePassword($action, $password, $token);
+    
+    if ($success) {
+      if($action == 'recover') {
+        $message = 'El password se cambió correctamente.';
+        $message .= ' <a href="/account/login.php">Click aquí para ingresar</a>';
+        $_SESSION['changePasswordMessage'] = $message;
+      } else {
+        $redirect = '/account/profile.php';
+      }
+    }
+    
     break;
   case 'recover':
+    $email = $_POST['email'];
+    generateRecoveryToken($email);
+    $_SESSION['recoverMessage'] = "Si el email existe como usuario se enviará un link para recuperar su password.";
+    $redirect = '/account/recover.php';
     break;
   case 'editProfile':
     $continue = true;

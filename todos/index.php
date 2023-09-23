@@ -176,7 +176,7 @@ if(empty($error) && !empty($db->getError())) {
       ?>
     </div>
     <?php }?>
-    <script src="/js/todos.js"></script>
+    <script src="/js/todos.js?v=2"></script>
   </main>
   <footer class="footer">
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/copyright.php') ?>

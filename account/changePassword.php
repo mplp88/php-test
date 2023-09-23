@@ -1,20 +1,23 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <?php
-//include('todos.php');
 
 $error = '';
+$token = '';
+$action = 'change';
 
-//$todoList = getAllTodos(); 
+if(isset($_GET['token'])) {
+  $token = $_GET['token'];
+} 
+
+if(isset($_GET['action'])) {
+  $action = ($_GET['action']);
+}
 
 if(isset($_SESSION["errorMessage"])) {
   $error = $_SESSION["errorMessage"];
 }
 
-// if(empty($error) && !empty($db->getError())) {
-//   global $db;
-//   $error = $db->getError();
-// }
 ?>
 <html lang="es">
 
@@ -27,7 +30,7 @@ if(isset($_SESSION["errorMessage"])) {
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/shared/navbar.php') ?>
   </header>
   <main class="container">
-    <h1>Registrarse</h1>
+    <h1>Cambiar contraseña</h1>
     <?php
     if (!empty($error)) {
       echo '<div id="error-message" class="alert alert-danger">';
@@ -35,18 +38,15 @@ if(isset($_SESSION["errorMessage"])) {
       echo '<p>' . $error . '</p>';
       echo '</div>';
     }
-    $email = '';
-    if(isset($_SESSION['email'])) {
-      $email = $_SESSION['email'];
-    }
     ?>
     <div class="card p-3 shadow mb-3">
-      <form action="server.php" method="post">
+      <?php if (isset($_SESSION['changePasswordMessage'])) {?>
+        <p class="alert alert-success"><?= $_SESSION['changePasswordMessage'] ?></p>
+      <?php } else { ?>
+      <form action="/account/server.php" method="post">
         <div class="form-group mb-3">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Email..." value="<?= $email ?>" required>
-          <label for="password">Contraseña</label>
-          <div id="password-container" class="input-group">
+        <label for="password">Contraseña</label>
+        <div id="password-container" class="input-group">
             <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." required>
             <button type="button" class="btn btn-secondary" onclick="showPassword()">
               <i class="fa-solid fa-eye"></i>
@@ -59,13 +59,18 @@ if(isset($_SESSION["errorMessage"])) {
               <i class="fa-solid fa-eye"></i>
             </button>
           </div>
-          <input type="hidden" name="acc" id="acc" value="register">
         </div>
-        <p>¿Ya tenés cuenta? <a href="/account/login.php">Hacé click acá</a></p>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
-      </form>
+        <input type="hidden" name="token" id="token" value="<?= $token ?>">
+        <input type="hidden" name="action" id="action" value="<?= $action ?>">
+        <input type="hidden" name="acc" id="acc" value="changePassword">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </form> 
+        <?php } ?>
+      <?php if (isset($_SESSION['changePasswordError'])) { ?>
+      <p class="alert alert-danger"><?= $_SESSION['changePasswordError'] ?></p>
+      <?php } ?>
     </div>
   </main>
   <footer class="footer">

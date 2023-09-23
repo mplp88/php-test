@@ -56,7 +56,7 @@ if(isset($_SESSION["errorMessage"])) {
       <a href="/account/profile.php?editProfile=true" class="btn btn-primary">Editar Perfil</a>
       <hr>
       <h2>Password</h2>
-      <a href="#">Cambiar Pasword</a>
+      <a href="/account/changePassword.php">Cambiar Pasword</a>
     <?php } else { ?>
     <div class="card p-3 shadow mb-3">
       <form action="server.php" method="post">

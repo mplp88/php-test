@@ -30,10 +30,10 @@
       <li>Lista de Quehaceres (To Do List). Se necesita una cuenta y estar loggeado para poder verlo.</li>
       <li>Página de configuración para seleccionar el tema. Se necesita una cuenta y estar loggeado para poder verlo.</li>
       <li>Página para modificar datos de perfil. Se necesita una cuenta y estar loggeado para poder verlo.</li>
+      <li>Reestablecimiento de contraseña.</li>
     </ul>
     <h3>Lista de cosas pendientes en desarrollo</h3>
     <ul>
-      <li>Reestablecimiento de contraseña.</li>
       <li>Envio de email para validación y reestablecer contraseña.</li>
       <li>Página para Curriculum Vitae.</li>
       <li>Traducción de la página al inglés y selector de idioma.</li>
