@@ -13,6 +13,7 @@ if(isset($_POST["acc"])){
 
 switch($acc) {
   case 'login':
+    unset($_SESSION['errorMessage']);
     $email = $_POST['email'];
     $password = $_POST['password'];
     $returnUrl = $_POST['returnUrl'];
@@ -54,6 +55,16 @@ switch($acc) {
     $token = $_POST['token'];
     $password = $_POST['password'];
     $action = $_POST['action'];
+    
+    $password = $_POST['password'];
+    $repeatPassword = $_POST['repeatPassword'];
+
+    if($password != $repeatPassword) {
+      $redirect .= '/account/register.php';
+      $_SESSION['errorMessage'] = 'Las Contraseñas no coinciden.';
+      break;
+    }
+
     $redirect = '/account/changePassword.php';
     if($action == 'recover' && empty($token)) {
       $_SESSION['changePasswordError'] = 'Token inválido';
