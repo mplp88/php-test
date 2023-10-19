@@ -57,6 +57,7 @@ if(empty($error) && !empty($db->getError())) {
             Hecho
           </label>
           <input type="hidden" name="todoId" id="todoId" value="<?= $todo->getId() ?>">
+          <input type="hidden" name="listId" id="listId" value="<?= $todo->getTodoListId() ?>">
           <input type="hidden" name="acc" id="acc" value="updateTodo">
         </div>
         <div class="form-group">

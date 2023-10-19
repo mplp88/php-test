@@ -68,6 +68,7 @@ function crearListaDo(nombreLista) {
   let form = document.createElement('form');
   form.method = 'post';
   form.action = 'server.php';
+  
   let acc = document.createElement('input');
   acc.id = 'acc';
   acc.name = 'acc';
