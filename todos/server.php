@@ -30,9 +30,13 @@ switch($acc) {
     break;
   case 'toggleChecked':
     $todoId = $_POST['todoId'];
-    $checked = $_POST['checked'];
+    $checked = $_POST['checked'] == 1 ? true : false;
+    $todo = getTodoById($todoId);
+    $listId = $todo->getTodoListId();
 
-    updateTodo($todoId, '', $checked);
+    $todo->setHecho($checked);
+
+    updateTodo($todo);
     break;
   case 'dismissError':
     unset($_SESSION['errorMessage']);
@@ -40,11 +44,16 @@ switch($acc) {
   case 'updateTodo':
     $todoId = $_POST['todoId'];
     $descripcion = $_POST['descripcion'];
-    $checked = '';
+    $checked = isset($_POST['checked']) ? true : false;
     if(isset($_POST['checked'])) {
-      $checked = 1;
+      echo 'Checked: ' . $_POST['checked'];
     }
-    updateTodo($todoId, $descripcion, $checked);
+
+    $todo = getTodoById($todoId);
+    $todo->setDescripcion($descripcion);
+    $todo->setHecho($checked);
+
+    updateTodo($todo);
     break;
   case 'deleteTodo':
     $todoId = $_POST['todoId'];

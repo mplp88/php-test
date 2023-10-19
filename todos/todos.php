@@ -13,6 +13,7 @@ class Todo {
   private $id;
   private $descripcion;
   private $hecho;
+  private $todoListId;
 
   //getters
   public function getId() : ?int {
@@ -27,6 +28,10 @@ class Todo {
     return $this->hecho;
   }
 
+  public function getTodoListId() : ?int {
+    return $this->todoListId;
+  }
+
   //setters
   public function setId($id) : void {
     $this->id = $id;
@@ -38,6 +43,10 @@ class Todo {
 
   public function setHecho($hecho) : void {
     $this->hecho = $hecho;
+  }
+
+  public function setTodoListId($todoListId) : void {
+    $this->todoListId = $todoListId;
   }
 }
 
@@ -174,7 +183,7 @@ function getAllTodos() {
   $todoList = new TodoList();
 
   $sql = '';
-  $sql .= 'SELECT `id`, `descripcion`, `hecho` ';
+  $sql .= 'SELECT `id`, `descripcion`, `hecho`, `todoListId` ';
   $sql .= 'FROM `todos`';
 
   $result = executeQuery($sql);
@@ -185,6 +194,7 @@ function getAllTodos() {
     $todo->setId($fila['id']);
     $todo->setDescripcion($fila['descripcion']);
     $todo->setHecho($fila['hecho']);
+    $todo->setTodoListId($fila['todoListId']);
     $todoList->addTodo($todo);
   }
 
@@ -194,7 +204,7 @@ function getAllTodos() {
 function getTodoById($id) {
   $todo = new Todo();
   $sql = '';
-  $sql .= 'SELECT `id`, `descripcion`, `hecho` ';
+  $sql .= 'SELECT `id`, `descripcion`, `hecho`, `todoListId` ';
   $sql .= 'FROM `todos`';
   $sql .= 'WHERE id = ' . $id;
 
@@ -206,6 +216,7 @@ function getTodoById($id) {
       $todo->setId($fila['id']);
       $todo->setDescripcion($fila['descripcion']);
       $todo->setHecho($fila['hecho']);
+      $todo->setTodoListId($fila['todoListId']);
     }
   }
 
@@ -227,7 +238,7 @@ function getTodosByListId($todoList) {
   }
 
   $sql = '';
-  $sql .= 'SELECT `id`, `descripcion`, `hecho` ';
+  $sql .= 'SELECT `id`, `descripcion`, `hecho`, `todoListId` ';
   $sql .= 'FROM `todos` ';
   $sql .= 'WHERE `todoListId` = ' . $todoList->getId();
 
@@ -239,6 +250,7 @@ function getTodosByListId($todoList) {
     $todo->setId($fila['id']);
     $todo->setDescripcion($fila['descripcion']);
     $todo->setHecho($fila['hecho']);
+    $todo->setTodoListId($fila['todoListId']);
     $todoList->addTodo($todo);
   }
 
@@ -255,19 +267,17 @@ function insertTodo($descripcion, $todoListId) {
   $result = executeQuery($sql);
 }
 
-function updateTodo($id, $descripcion, $hecho) {
+function updateTodo($todo) {
   $sql = '';
   $sql .= 'UPDATE `todos` SET ';
-  if(!empty($descripcion)){
-    $sql .= 'descripcion = \'' . $descripcion . '\', ';
-  }
+  $sql .= 'descripcion = \'' . $todo->getDescripcion() . '\', ';
 
-  if(empty($hecho)) {
-    $sql .= '`hecho` = 0 ';
-  } else {
+  if($todo->getHecho()) {
     $sql .= '`hecho` = 1 ';
+  } else {
+    $sql .= '`hecho` = 0 ';
   }
-  $sql .= 'WHERE `id` = ' . $id . ';';
+  $sql .= 'WHERE `id` = ' . $todo->getId() . ';';
 
   $result = executeQuery($sql);
   return $result;
