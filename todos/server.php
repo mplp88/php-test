@@ -45,9 +45,6 @@ switch($acc) {
     $todoId = $_POST['todoId'];
     $descripcion = $_POST['descripcion'];
     $checked = isset($_POST['checked']) ? true : false;
-    if(isset($_POST['checked'])) {
-      echo 'Checked: ' . $_POST['checked'];
-    }
 
     $todo = getTodoById($todoId);
     $todo->setDescripcion($descripcion);
