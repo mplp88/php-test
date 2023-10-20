@@ -34,16 +34,6 @@ if(isset($_SESSION["errorMessage"])) {
       echo '<p>' . $error . '</p>';
       echo '</div>';
     }
-
-    if(isset($_SESSION['token'])) {
-      $token = $_SESSION['token'];
-      echo '<p>Se generó el token para recuperar. ';
-      echo '<a href="/account/changePassword.php/?action=recover&token=' . $token . '">';
-      echo 'Click para ir a modificar el password.</a>';
-          
-      unset($_SESSION['changePasswordError']);
-      unset($_SESSION['changePasswordMessage']);
-    }
     ?>
     <div class="card p-3 shadow mb-3">
       <form action="server.php" method="post">
@@ -61,6 +51,19 @@ if(isset($_SESSION["errorMessage"])) {
           <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
       </form>
+      <?php
+      if(isset($_SESSION['token'])) {
+        $token = $_SESSION['token'];
+        echo '<p>Se generó el token para recuperar. ';
+        echo '<a href="/account/changePassword.php/?action=recover&token=' . $token . '">';
+        echo 'Click para ir a modificar el password.</a>';
+        echo '<br>';
+        echo '(Este token será enviado por email cuando se implemente envío de emails)';
+            
+        unset($_SESSION['changePasswordError']);
+        unset($_SESSION['changePasswordMessage']);
+      }
+      ?>
     </div>
   </main>
   <footer class="footer">
