@@ -44,6 +44,7 @@ if(empty($error) && !empty($db->getError())) {
     <div>
       <form action="server.php" method="post">
         <input type="hidden" name="todoId" id="todoId" value="<?= $todo->getId() ?>">
+        <input type="hidden" name="listId" id="listId" value="<?= $todo->getTodoListId() ?>">
         <input type="hidden" name="acc" id="acc" value="deleteTodo">
         <div class="form-group mb-3">
           <h3>Está a punto de eliminar este registro. ¿Está seguro?</h3>
